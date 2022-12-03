@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -19,8 +20,12 @@ public class GroupController {
     private GroupRepository groupRepository;
 
     @GetMapping("/{id}")
-    private Mono<Group> getGroups(@PathVariable String id){
-
+    private Mono<Group> getGroup(@PathVariable String id){
         return groupRepository.getGroup(id).log();
+    }
+
+    @GetMapping("")
+    private Flux<Group> getAllGroups(){
+        return groupRepository.getAllGroups();
     }
 }
