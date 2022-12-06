@@ -2,7 +2,6 @@ package com.example.backendreactive.service;
 
 import com.example.backendreactive.model.Group;
 import com.example.backendreactive.model.Groups;
-import com.example.backendreactive.model.Team;
 import com.example.backendreactive.repository.GroupsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,20 +24,18 @@ public class GroupsService {
     public Mono<Group> getGroupByName(String name){
         Group error=new Group();
         error.setName("not found");
-        Team team=new Team();
+
         try{
             Optional<Groups> result = groupsRepository.findById(name);
-            error.setName(result.get().getName());
-            error.setTeams(result.get().getTeams().getTeam());
-            System.out.println(result);
+            if(result.isPresent()){
+                error.setName(result.get().getName());
+                error.setTeams(result.get().getTeams().getTeam());
+            }
+
+
         }catch(NoSuchElementException e){
             System.out.println(e.getMessage());
         }
-
-
-
-
-
 
         return Mono.just(error);
     }
