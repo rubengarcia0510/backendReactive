@@ -1,7 +1,7 @@
 package com.example.backendreactive.model;
 
 public class Team {
-    private String team;
+    private String name;
     private int pj;
     private int pg;
     private int pe;
@@ -15,7 +15,7 @@ public class Team {
     }
 
     public Team(String team) {
-        this.team = team;
+        this.name = team;
         this.pj = 0;
         this.pg = 0;
         this.pe = 0;
@@ -26,12 +26,12 @@ public class Team {
         this.points = 0;
     }
 
-    public String getTeam() {
-        return team;
+    public String getName() {
+        return name;
     }
 
-    public void setTeam(String team) {
-        this.team = team;
+    public void setName(String team) {
+        this.name = team;
     }
 
     public int getPj() {
@@ -101,7 +101,7 @@ public class Team {
     @Override
     public String toString() {
         return "Team{" +
-                "team='" + team + '\'' +
+                "name='" + name + '\'' +
                 ", pj=" + pj +
                 ", pg=" + pg +
                 ", pe=" + pe +

@@ -2,8 +2,11 @@ package com.example.backendreactive.controller;
 
 
 import com.example.backendreactive.model.Group;
+import com.example.backendreactive.model.Groups;
 import com.example.backendreactive.model.Team;
 import com.example.backendreactive.repository.GroupRepository;
+import com.example.backendreactive.repository.GroupsRepository;
+import com.example.backendreactive.service.GroupsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,13 +22,22 @@ public class GroupController {
     @Autowired
     private GroupRepository groupRepository;
 
+    @Autowired
+    private GroupsService groupsService;
+
     @GetMapping("/{id}")
     private Mono<Group> getGroup(@PathVariable String id){
-        return groupRepository.getGroup(id).log();
+        return groupsService.getGroupByName(id).log();
+        //return groupRepository.getGroup(id).log();
     }
 
     @GetMapping("")
     private Flux<Group> getAllGroups(){
         return groupRepository.getAllGroups();
+    }
+
+    @GetMapping("all")
+    private Flux<Groups> findAllGroups(){
+        return groupsService.getAllGroups();
     }
 }
