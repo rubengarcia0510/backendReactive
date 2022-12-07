@@ -11,6 +11,7 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication
 @EnableWebFlux
@@ -31,9 +32,10 @@ public class BackendReactiveApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        deleteAll();
-        addSampleData();
-        listAll();
+        //deleteAll();
+        //addSampleData();
+        //listAll();
+        createFixture();
 
     }
 
@@ -186,5 +188,14 @@ public class BackendReactiveApplication implements CommandLineRunner {
         System.out.println("Listing sample data");
 
         groupsRepository.findAll().forEach(element->System.out.println(element.toString()));
+    }
+
+    private void createFixture(){
+        System.out.println("Create fixture");
+        Optional<Groups> variable = groupsRepository.findById("A");
+        variable.ifPresent(element->{
+            System.out.println(element);
+        });
+
     }
 }
