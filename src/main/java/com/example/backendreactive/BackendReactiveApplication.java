@@ -2,12 +2,7 @@ package com.example.backendreactive;
 
 import com.example.backendreactive.model.*;
 import com.example.backendreactive.repository.GroupsRepository;
-import com.example.backendreactive.repository.TeamsRepository;
-import com.example.backendreactive.repository.UserRepository;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.internal.connection.tlschannel.ServerTlsChannel;
-import org.bson.Document;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,14 +15,9 @@ import java.util.List;
 @SpringBootApplication
 @EnableWebFlux
 public class BackendReactiveApplication implements CommandLineRunner {
-    @Autowired
-    UserRepository repository;
 
     @Autowired
     GroupsRepository groupsRepository;
-
-    @Autowired
-    TeamsRepository teamsRepository;
 
 
 
@@ -40,7 +30,7 @@ public class BackendReactiveApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         deleteAll();
         addSampleData();
         listAll();
@@ -49,57 +39,152 @@ public class BackendReactiveApplication implements CommandLineRunner {
 
     public void deleteAll() {
         System.out.println("Deleting all records..");
-        repository.deleteAll();
         groupsRepository.deleteAll();
     }
 
     public void addSampleData() {
         System.out.println("Adding sample data");
-        repository.save(new Users("Jack Bauer", "New York", 11111d));
-        repository.save(new Users("Harvey Spectre", "London", 22222d));
-        repository.save(new Users("Mike Ross", "New Jersey", 333333d));
-        repository.save(new Users("Louise Litt", "Kathmandu", 44444d));
 
-        Team team1=new Team("Argentina");
-        Team team2=new Team("Arabia Saudita");
-        Team team3=new Team("Polonia");
-        Team team4=new Team("Mexico");
-        Group grupoC=new Group();
-        grupoC.setName("C");
-        List<Team> teams=new ArrayList<>();
+        //grupo A
+        List<Team> teams = new ArrayList<>();
+
+
+        Team team1 = new Team("Senegal");
+        Team team2 = new Team("Holanda");
+        Team team3 = new Team("Qatar");
+        Team team4 = new Team("Ecuador");
+
 
         teams.add(team1);
         teams.add(team2);
         teams.add(team3);
         teams.add(team4);
 
-        Teams equiposX=new Teams(teams);
-        Groups grupoX=new Groups("C",equiposX);
-        groupsRepository.save(grupoX);
-        team1=new Team("Senegal");
-        team2=new Team("Holanda");
-        team3=new Team("Qatar");
-        team4=new Team("Ecuador");
-        teams=new ArrayList<>();
+        Teams equiposA = new Teams(teams);
+        Groups grupoA = new Groups("A", equiposA);
 
+
+
+        //grupo b
+        team1 = new Team("inglaterra");
+        team2 = new Team("estados unidos");
+        team3 = new Team("iran");
+        team4 = new Team("wales");
+
+        teams = new ArrayList<>();
         teams.add(team1);
         teams.add(team2);
         teams.add(team3);
         teams.add(team4);
 
-        Teams equiposA=new Teams(teams);
-        Groups grupoA=new Groups("A",equiposA);
+        Teams equiposB = new Teams(teams);
+        Groups grupoB = new Groups("B", equiposB);
+
+        //grupo C
+        team1 = new Team("Argentina");
+        team2 = new Team("Arabia Saudita");
+        team3 = new Team("Polonia");
+        team4 = new Team("Mexico");
+
+        teams = new ArrayList<>();
+        teams.add(team1);
+        teams.add(team2);
+        teams.add(team3);
+        teams.add(team4);
+
+        Teams equiposC = new Teams(teams);
+        Groups grupoC = new Groups("C", equiposC);
+
+        //grupo D
+        team1 = new Team("francia");
+        team2 = new Team("Dinamarka");
+        team3 = new Team("Australia");
+        team4 = new Team("Tunez");
+
+        teams = new ArrayList<>();
+        teams.add(team1);
+        teams.add(team2);
+        teams.add(team3);
+        teams.add(team4);
+
+        Teams equiposD = new Teams(teams);
+        Groups grupoD = new Groups("D", equiposD);
+
+        //grupo E
+        team1 = new Team("Spaña");
+        team2 = new Team("Alemania");
+        team3 = new Team("Japon");
+        team4 = new Team("Costa Rica");
+
+        teams = new ArrayList<>();
+        teams.add(team1);
+        teams.add(team2);
+        teams.add(team3);
+        teams.add(team4);
+
+        Teams equiposE = new Teams(teams);
+        Groups grupoE = new Groups("E", equiposE);
+
+        //grupo F
+        team1 = new Team("Belgica");
+        team2 = new Team("Marruecos");
+        team3 = new Team("Croacia");
+        team4 = new Team("Canada");
+
+        teams = new ArrayList<>();
+        teams.add(team1);
+        teams.add(team2);
+        teams.add(team3);
+        teams.add(team4);
+
+        Teams equiposF = new Teams(teams);
+        Groups grupoF = new Groups("F", equiposF);
+
+        //grupo G
+        team1 = new Team("Brasil");
+        team2 = new Team("Serbia");
+        team3 = new Team("Suiza");
+        team4 = new Team("Camerun");
+
+        teams = new ArrayList<>();
+        teams.add(team1);
+        teams.add(team2);
+        teams.add(team3);
+        teams.add(team4);
+
+        Teams equiposG = new Teams(teams);
+        Groups grupoG = new Groups("G", equiposG);
+
+        //grupo H
+        team1 = new Team("Portugal");
+        team2 = new Team("Uruguay");
+        team3 = new Team("Ghana");
+        team4 = new Team("Korea Del Sur");
+
+        teams = new ArrayList<>();
+        teams.add(team1);
+        teams.add(team2);
+        teams.add(team3);
+        teams.add(team4);
+
+        Teams equiposH = new Teams(teams);
+        Groups grupoH = new Groups("H", equiposH);
+
         groupsRepository.save(grupoA);
-
-
-
+        groupsRepository.save(grupoB);
+        groupsRepository.save(grupoC);
+        groupsRepository.save(grupoD);
+        groupsRepository.save(grupoE);
+        groupsRepository.save(grupoF);
+        groupsRepository.save(grupoG);
+        groupsRepository.save(grupoH);
 
 
     }
 
     public void listAll() {
         System.out.println("Listing sample data");
-        repository.findAll().forEach(u -> System.out.println(u));
+
         groupsRepository.findAll().forEach(element->System.out.println(element.toString()));
     }
 }
