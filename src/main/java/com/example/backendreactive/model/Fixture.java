@@ -18,4 +18,8 @@ public class Fixture {
         this.group = group;
         this.gameList = gameList;
     }
+
+    public Fixture() {
+
+    }
 }
