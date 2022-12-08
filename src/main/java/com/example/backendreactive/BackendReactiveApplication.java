@@ -1,6 +1,7 @@
 package com.example.backendreactive;
 
 import com.example.backendreactive.model.*;
+import com.example.backendreactive.repository.FixtureRepository;
 import com.example.backendreactive.repository.GroupsRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,8 @@ public class BackendReactiveApplication implements CommandLineRunner {
     @Autowired
     GroupsRepository groupsRepository;
 
-
+    @Autowired
+    FixtureRepository fixtureRepository;
 
 
     public static void main(String[] args) {
@@ -35,7 +37,7 @@ public class BackendReactiveApplication implements CommandLineRunner {
     public void run(String... args) {
         deleteAll();
         addSampleData();
-        //listAll();
+        
         System.out.println("------------------");
         System.out.println("Create fixture");
         createFixture("A");
@@ -47,11 +49,14 @@ public class BackendReactiveApplication implements CommandLineRunner {
         createFixture("G");
         createFixture("H");
 
+        listAll();
+
     }
 
     public void deleteAll() {
         System.out.println("Deleting all records..");
         groupsRepository.deleteAll();
+        fixtureRepository.deleteAll();
     }
 
     public void addSampleData() {
@@ -198,6 +203,7 @@ public class BackendReactiveApplication implements CommandLineRunner {
         System.out.println("Listing sample data");
 
         groupsRepository.findAll().forEach(element->System.out.println(element.toString()));
+        fixtureRepository.findAll().forEach(element->System.out.println(element.toString()));
     }
 
     private void createFixture(String grupo){
@@ -249,6 +255,10 @@ public class BackendReactiveApplication implements CommandLineRunner {
         games.forEach(element->{
             System.out.println(element.getHome()+":"+element.getVisitor()+":"+element.getFase());
         });
+
+        Fixture fixture=new Fixture(grupo,games);
+
+        fixtureRepository.save(fixture);
 
 
 
