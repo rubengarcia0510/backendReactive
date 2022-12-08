@@ -1,6 +1,6 @@
 package com.example.backendreactive.model;
 
-public class Game {
+public class Game implements Comparable<Game>{
 
     private String home;
     private String visitor;
@@ -58,4 +58,13 @@ public class Game {
     public void setFase(String fase) {
         this.fase = fase;
     }
+
+    @Override
+    public int compareTo(Game o) {
+        if (getFase() == null || o.getFase() == null) {
+            return 0;
+        }
+        return getFase().compareTo(o.getFase());
+    }
+
 }
