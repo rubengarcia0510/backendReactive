@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.reactive.config.EnableWebFlux;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,10 +33,19 @@ public class BackendReactiveApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        //deleteAll();
-        //addSampleData();
+        deleteAll();
+        addSampleData();
         //listAll();
-        createFixture();
+        System.out.println("------------------");
+        System.out.println("Create fixture");
+        createFixture("A");
+        createFixture("B");
+        createFixture("C");
+        createFixture("D");
+        createFixture("E");
+        createFixture("F");
+        createFixture("G");
+        createFixture("H");
 
     }
 
@@ -68,10 +78,10 @@ public class BackendReactiveApplication implements CommandLineRunner {
 
 
         //grupo b
-        team1 = new Team("inglaterra");
-        team2 = new Team("estados unidos");
-        team3 = new Team("iran");
-        team4 = new Team("wales");
+        team1 = new Team("Inglaterra");
+        team2 = new Team("Iran");
+        team3 = new Team("USA");
+        team4 = new Team("Gales");
 
         teams = new ArrayList<>();
         teams.add(team1);
@@ -85,8 +95,8 @@ public class BackendReactiveApplication implements CommandLineRunner {
         //grupo C
         team1 = new Team("Argentina");
         team2 = new Team("Arabia Saudita");
-        team3 = new Team("Polonia");
-        team4 = new Team("Mexico");
+        team3 = new Team("Mexico");
+        team4 = new Team("Polonia");
 
         teams = new ArrayList<>();
         teams.add(team1);
@@ -98,9 +108,9 @@ public class BackendReactiveApplication implements CommandLineRunner {
         Groups grupoC = new Groups("C", equiposC);
 
         //grupo D
-        team1 = new Team("francia");
-        team2 = new Team("Dinamarka");
-        team3 = new Team("Australia");
+        team1 = new Team("Francia");
+        team2 = new Team("Australia");
+        team3 = new Team("Dinamarca");
         team4 = new Team("Tunez");
 
         teams = new ArrayList<>();
@@ -113,10 +123,10 @@ public class BackendReactiveApplication implements CommandLineRunner {
         Groups grupoD = new Groups("D", equiposD);
 
         //grupo E
-        team1 = new Team("Spaña");
-        team2 = new Team("Alemania");
-        team3 = new Team("Japon");
-        team4 = new Team("Costa Rica");
+        team1 = new Team("España");
+        team2 = new Team("Costa Rica");
+        team3 = new Team("Alemania");
+        team4 = new Team("Japon");
 
         teams = new ArrayList<>();
         teams.add(team1);
@@ -129,9 +139,9 @@ public class BackendReactiveApplication implements CommandLineRunner {
 
         //grupo F
         team1 = new Team("Belgica");
-        team2 = new Team("Marruecos");
-        team3 = new Team("Croacia");
-        team4 = new Team("Canada");
+        team2 = new Team("Canada");
+        team3 = new Team("Marruecos");
+        team4 = new Team("Croacia");
 
         teams = new ArrayList<>();
         teams.add(team1);
@@ -159,9 +169,9 @@ public class BackendReactiveApplication implements CommandLineRunner {
 
         //grupo H
         team1 = new Team("Portugal");
-        team2 = new Team("Uruguay");
-        team3 = new Team("Ghana");
-        team4 = new Team("Korea Del Sur");
+        team2 = new Team("Ghana");
+        team3 = new Team("Uruguay");
+        team4 = new Team("Corea Del Sur");
 
         teams = new ArrayList<>();
         teams.add(team1);
@@ -190,12 +200,57 @@ public class BackendReactiveApplication implements CommandLineRunner {
         groupsRepository.findAll().forEach(element->System.out.println(element.toString()));
     }
 
-    private void createFixture(){
-        System.out.println("Create fixture");
-        Optional<Groups> variable = groupsRepository.findById("A");
-        variable.ifPresent(element->{
-            System.out.println(element);
+    private void createFixture(String grupo){
+
+        Optional<Groups> variable = groupsRepository.findById(grupo);
+        List<String> equipos=new ArrayList<>();
+
+        equipos.add(variable.get().getTeams().getTeam().get(0).getName());
+        equipos.add(variable.get().getTeams().getTeam().get(1).getName());
+        equipos.add(variable.get().getTeams().getTeam().get(2).getName());
+        equipos.add(variable.get().getTeams().getTeam().get(3).getName());
+
+        List<Game> games=new ArrayList<>();
+        System.out.println("------------------");
+        System.out.println("Partidos grupo: "+grupo);
+        System.out.println("------------------");
+        for(int i=0;i<equipos.size();i++){
+            int fecha=0;
+            if(i==0){
+                fecha=i+1;
+            }
+            if(i==1){
+                fecha=3;
+            }
+
+            for(int j=i+1;j<equipos.size();j++){
+                    if(i==0){
+                        Game newGame=new Game(equipos.get(i), equipos.get(j),Integer.toString(fecha) );
+                        games.add(newGame);
+                        fecha++;
+                    }
+                    if(i==1){
+                        Game newGame=new Game(equipos.get(i), equipos.get(j),Integer.toString(fecha) );
+                        games.add(newGame);
+                        fecha--;
+                    }
+
+                    if(i==2){
+                        fecha=1;
+                        Game newGame=new Game(equipos.get(i), equipos.get(j),Integer.toString(fecha) );
+                        games.add(newGame);
+                    }
+            }
+
+        }
+
+        Collections.sort(games);
+
+        games.forEach(element->{
+            System.out.println(element.getHome()+":"+element.getVisitor()+":"+element.getFase());
         });
+
+
 
     }
 }
