@@ -67,4 +67,14 @@ public class Game implements Comparable<Game>{
         return getFase().compareTo(o.getFase());
     }
 
+    @Override
+    public String toString() {
+        return "Game{" +
+                "home='" + home + '\'' +
+                ", visitor='" + visitor + '\'' +
+                ", goalsHome=" + goalsHome +
+                ", goalsVisitor=" + goalsVisitor +
+                ", fase='" + fase + '\'' +
+                '}';
+    }
 }
