@@ -1,19 +1,27 @@
 package com.example.backendreactive.model;
 
-import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.List;
 
-@Data
-@Document(collection = "teams")
-public class Teams {
-    @Id
-    private String id;
-    private List<Team> team;
 
-    public Teams(List<Team> team) {
-        this.team = team;
+public class Teams {
+    private List<Team> teams;
+
+    public Teams(List<Team> teams) {
+        this.teams = teams;
+    }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
+    }
+
+    @Override
+    public String toString() {
+        return "Teams{" +
+                "teams=" + teams +
+                '}';
     }
 }

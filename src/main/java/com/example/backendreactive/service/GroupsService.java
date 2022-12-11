@@ -29,7 +29,7 @@ public class GroupsService {
             Optional<Groups> result = groupsRepository.findById(name);
             if(result.isPresent()){
                 error.setName(result.get().getName());
-                error.setTeams(result.get().getTeams().getTeam());
+                error.setTeams(result.get().getTeams());
             }
 
 
