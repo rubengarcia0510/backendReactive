@@ -78,7 +78,7 @@ public class BackendReactiveApplication implements CommandLineRunner {
         teams.add(team4);
 
         Teams equiposA = new Teams(teams);
-        Groups grupoA = new Groups("A", equiposA);
+        Groups grupoA = new Groups("A", teams);
 
 
 
@@ -95,7 +95,7 @@ public class BackendReactiveApplication implements CommandLineRunner {
         teams.add(team4);
 
         Teams equiposB = new Teams(teams);
-        Groups grupoB = new Groups("B", equiposB);
+        Groups grupoB = new Groups("B", teams);
 
         //grupo C
         team1 = new Team("Argentina");
@@ -110,7 +110,7 @@ public class BackendReactiveApplication implements CommandLineRunner {
         teams.add(team4);
 
         Teams equiposC = new Teams(teams);
-        Groups grupoC = new Groups("C", equiposC);
+        Groups grupoC = new Groups("C", teams);
 
         //grupo D
         team1 = new Team("Francia");
@@ -125,7 +125,7 @@ public class BackendReactiveApplication implements CommandLineRunner {
         teams.add(team4);
 
         Teams equiposD = new Teams(teams);
-        Groups grupoD = new Groups("D", equiposD);
+        Groups grupoD = new Groups("D", teams);
 
         //grupo E
         team1 = new Team("España");
@@ -140,7 +140,7 @@ public class BackendReactiveApplication implements CommandLineRunner {
         teams.add(team4);
 
         Teams equiposE = new Teams(teams);
-        Groups grupoE = new Groups("E", equiposE);
+        Groups grupoE = new Groups("E", teams);
 
         //grupo F
         team1 = new Team("Belgica");
@@ -155,7 +155,7 @@ public class BackendReactiveApplication implements CommandLineRunner {
         teams.add(team4);
 
         Teams equiposF = new Teams(teams);
-        Groups grupoF = new Groups("F", equiposF);
+        Groups grupoF = new Groups("F", teams);
 
         //grupo G
         team1 = new Team("Brasil");
@@ -170,7 +170,7 @@ public class BackendReactiveApplication implements CommandLineRunner {
         teams.add(team4);
 
         Teams equiposG = new Teams(teams);
-        Groups grupoG = new Groups("G", equiposG);
+        Groups grupoG = new Groups("G", teams);
 
         //grupo H
         team1 = new Team("Portugal");
@@ -185,7 +185,7 @@ public class BackendReactiveApplication implements CommandLineRunner {
         teams.add(team4);
 
         Teams equiposH = new Teams(teams);
-        Groups grupoH = new Groups("H", equiposH);
+        Groups grupoH = new Groups("H", teams);
 
         groupsRepository.save(grupoA);
         groupsRepository.save(grupoB);
@@ -203,7 +203,7 @@ public class BackendReactiveApplication implements CommandLineRunner {
         System.out.println("Listing sample data");
 
         groupsRepository.findAll().forEach(element->System.out.println(element.toString()));
-        fixtureRepository.findAll().forEach(element->System.out.println(element.toString()));
+        //fixtureRepository.findAll().forEach(element->System.out.println(element.toString()));
     }
 
     private void createFixture(String grupo){
@@ -211,10 +211,10 @@ public class BackendReactiveApplication implements CommandLineRunner {
         Optional<Groups> variable = groupsRepository.findById(grupo);
         List<String> equipos=new ArrayList<>();
 
-        equipos.add(variable.get().getTeams().getTeam().get(0).getName());
-        equipos.add(variable.get().getTeams().getTeam().get(1).getName());
-        equipos.add(variable.get().getTeams().getTeam().get(2).getName());
-        equipos.add(variable.get().getTeams().getTeam().get(3).getName());
+        equipos.add(variable.get().getTeams().get(0).getName());
+        equipos.add(variable.get().getTeams().get(1).getName());
+        equipos.add(variable.get().getTeams().get(2).getName());
+        equipos.add(variable.get().getTeams().get(3).getName());
 
         List<Game> games=new ArrayList<>();
         System.out.println("------------------");
