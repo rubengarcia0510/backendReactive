@@ -1,6 +1,6 @@
 build:
   hello-world:
-    image: okteto.dev/java-maven-hello-world:1.0.0
+    image: okteto.dev/java-maven-backendReactive:1.2.2-SNAPSHOT
     context: .
 deploy:
   - kubectl apply -f k8s.yml
