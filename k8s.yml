@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backendReactive
+spec:
+  selector:
+    matchLabels:
+      app: backendReactive
+  template:
+    metadata:
+      labels:
+        app: backendReactive
+    spec:
+      containers:
+        - image: okteto.dev/java-maven-backendReactive:1.2.1-SNAPSHOT
+          name: backendReactive
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: backendReactive
+spec:
+  type: ClusterIP
+  ports:
+    - name: "backendReactive"
+      port: 8081
+  selector:
+    app: backendReactive
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backendReactive
+  annotations:
+    dev.okteto.com/generate-host: backendReactive
+spec:
+  rules:
+    - http:
+        paths:
+          - backend:
+              service:
+                name: backendReactive
+                port:
+                  number: 8081
+            path: /
+            pathType: ImplementationSpecific
