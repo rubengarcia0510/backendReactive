@@ -3,6 +3,8 @@ build:
     image: okteto.dev/java-maven-backendReactive:1.2.2-SNAPSHOT
     context: .
 deploy:
+  - name: Deploy MongoDB
+    command:  helm upgrade --install mongodb mongodb/mongodb-12.1.30.tgz -f mongodb/values.yml --version 12.1.30
   - kubectl apply -f k8s.yml
 dev:
   hello-world:
