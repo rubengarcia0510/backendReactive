@@ -7,7 +7,7 @@ build:
 
 deploy:
   - name: Deploy MongoDB
-    command:  helm upgrade --install mongodb mongodb/mongodb-12.1.30.tgz -f mongodb/values.yml --version 12.1.30
+  - command:  helm upgrade --install mongodb mongodb/mongodb-12.1.30.tgz -f mongodb/values.yml --version 12.1.30
   - name: Deploy backend
   - command: kubectl apply -f k8s.yml
 
