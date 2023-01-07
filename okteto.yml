@@ -1,17 +1,22 @@
+icon: https://apps.okteto.com/movies/icon.png
+
 build:
   backend:
     image: okteto.dev/java-maven-backendReactive:1.2.2-SNAPSHOT
-    context: .
+    context: rent
+
 deploy:
+  - name: Deploy MongoDB
+    command:  helm upgrade --install mongodb mongodb/mongodb-12.1.30.tgz -f mongodb/values.yml --version 12.1.30
   - name: Deploy backend
-  - command:  kubectl apply -f k8s.yml
+  - command: kubectl apply -f k8s.yml
+
 dev:
   backend:
-    image: okteto/maven:3
-    command: bash
+    command: mvn spring-boot:run
     sync:
-      - .:/usr/src/app
-    forward:
-      - 5005:5005
+      - rent:/app
     volumes:
       - /root/.m2
+    forward:
+      - 5005:5005
