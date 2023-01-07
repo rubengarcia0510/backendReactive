@@ -1,27 +1,13 @@
-icon: https://apps.okteto.com/movies/icon.png
-
-mongodb:
-  image: bitnami/mongodb:latest
-  ports:
-    - 27017
-  volumes:
-    - /bitnami/mongodb
-
-build:
+services:
   backend:
-    image: okteto.dev/java-maven-backendReactive:1.2.2-SNAPSHOT
-    context: .
-
-deploy:
-  - name: Deploy backend
-  - command: kubectl apply -f k8s.yml
-
-dev:
-  backend:
-    command: mvn spring-boot:run
-    sync:
-      - rent:/app
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      - DB_HOST=${HOST}
+  mongodb:
+    image: bitnami/mongodb:latest
+    ports:
+      - 27017
     volumes:
-      - /root/.m2
-    forward:
-      - 5005:5005
+      - /bitnami/mongodb
