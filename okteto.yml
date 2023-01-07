@@ -3,7 +3,7 @@ icon: https://apps.okteto.com/movies/icon.png
 build:
   backend:
     image: okteto.dev/java-maven-backendReactive:1.2.2-SNAPSHOT
-    context: rent
+    context: .
 
 deploy:
   - name: Deploy MongoDB
