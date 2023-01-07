@@ -1,12 +1,12 @@
 build:
-  backendReactive:
+  backend:
     image: okteto.dev/java-maven-backendReactive:1.2.2-SNAPSHOT
     context: .
 deploy:
   - name: Deploy backend
   - command:  kubectl apply -f k8s.yml
 dev:
-  backendReactive:
+  backend:
     image: okteto/maven:3
     command: bash
     sync:
