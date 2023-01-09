@@ -1,13 +1,17 @@
-services:
+build:
   backend:
-    build: .
-    ports:
-      - 8080:8080
-    environment:
-      - DB_HOST=${HOST}
-  mongodb:
-    image: bitnami/mongodb:latest
-    ports:
-      - 27017
+    image: okteto.dev/java-maven-backendReactive:1.2.2-SNAPSHOT
+    context: .
+deploy:
+  - name: Deploy backend
+  - command:  kubectl apply -f k8s.yml
+dev:
+  backend:
+    image: okteto/maven:3
+    command: bash
+    sync:
+      - .:/usr/src/app
+    forward:
+      - 5005:5005
     volumes:
-      - /bitnami/mongodb
+      - /root/.m2
