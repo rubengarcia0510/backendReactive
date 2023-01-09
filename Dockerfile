@@ -7,5 +7,5 @@ FROM openjdk:17-jdk-slim-buster
 EXPOSE 8081
 WORKDIR /app
 ADD . .
-COPY --from=build /code/build/libs/*.jar .
-CMD java -jar *.jar
+COPY --from=build /code/target/*.jar app.jar
+CMD java -jar app.jar
