@@ -22,7 +22,7 @@ public class GroupController {
     @Autowired
     private GroupsService groupsService;
 
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = "http://localhost:8080,https://10.155.217.40:8443")
     @GetMapping("/{id}")
     private Mono<Group> getGroup(@PathVariable String id){
         return groupsService.getGroupByName(id).log();
@@ -34,7 +34,7 @@ public class GroupController {
         return groupRepository.getAllGroups();
     }
 
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = "http://localhost:8080,https://10.155.217.40:8443")
     @GetMapping("all")
     private Flux<Groups> findAllGroups(){
         return groupsService.getAllGroups();
