@@ -4,7 +4,7 @@ COPY . /code/
 RUN mvn install
 
 FROM openjdk:17-jdk-slim-buster
-EXPOSE 8081
+EXPOSE 8443
 WORKDIR /app
 ADD . .
 COPY --from=build /code/target/*.jar app.jar
