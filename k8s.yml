@@ -22,7 +22,7 @@ kind: Service
 metadata:
   name: backend
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - name: "backend"
       port: 443
