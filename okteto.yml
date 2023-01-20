@@ -1,0 +1,18 @@
+build:
+  backend:
+    image: okteto.dev/java-maven-backend-reactive:1.2.2-SNAPSHOT
+    context: .
+deploy:
+  - name: Deploy backend
+  - command:  kubectl apply -f k8s.yml
+dev:
+  backend:
+    image: okteto/maven:3
+    command: bash
+    sync:
+      - .:/usr/src/app
+    forward:
+      - 5005:5005
+      - 8080:8080
+    volumes:
+      - /root/.m2
