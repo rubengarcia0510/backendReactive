@@ -12,7 +12,7 @@ spec:
         app: backend
     spec:
       containers:
-        - image: okteto.dev/java-maven-backend-reactive:1.2.2-SNAPSHOT
+        - image: okteto.dev/java-maven-backend-reactive:2.0.0-SNAPSHOT
           name: backend
 
 ---
