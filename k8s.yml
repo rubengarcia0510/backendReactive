@@ -25,7 +25,7 @@ spec:
   type: LoadBalancer
   ports:
     - name: "backend"
-      port: 443
+      port: 8080
   selector:
     app: backend
 
@@ -45,6 +45,6 @@ spec:
               service:
                 name: backend
                 port:
-                  number: 443
+                  number: 8080
             path: /
             pathType: ImplementationSpecific

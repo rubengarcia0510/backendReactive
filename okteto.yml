@@ -13,6 +13,6 @@ dev:
       - .:/usr/src/app
     forward:
       - 5005:5005
-      - 443:443
+      - 8080:8080
     volumes:
       - /root/.m2
